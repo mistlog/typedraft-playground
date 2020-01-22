@@ -1,24 +1,18 @@
 import React from 'react';
 import { Header } from "./component/Header";
-import { Editor } from "./component/Editor";
+import { Editor, FormatCode } from "./component/Editor";
 import { mergeStyleSets } from 'office-ui-fabric-react';
 import { Transcriber } from "typedraft";
-import * as prettier from "prettier/standalone";
-import * as TypescriptParser from "prettier/parser-typescript";
 import { IExample } from "./component/ExampleNav";
 
-function GetOutput(input: string, mode: "markdown" | "code"): string
+async function GetOutput(input: string, mode: "markdown" | "code"): Promise<string>
 {
     try
     {
         if (mode === "code")
         {
             const code = new Transcriber(input).Transcribe();
-            const output = prettier.format(code, {
-                parser: "typescript",
-                semi: false,
-                plugins: [TypescriptParser]
-            });
+            const output = await FormatCode(code);
             return output;
         }
 
