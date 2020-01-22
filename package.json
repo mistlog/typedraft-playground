@@ -1,0 +1,56 @@
+{
+  "name": "typedraft-playground",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@types/react": "16.8.15",
+    "@types/react-dom": "16.8.4",
+    "@uifabric/fluent-theme": "^0.16.7",
+    "axios": "^0.19.1",
+    "axios-hooks": "^1.9.0",
+    "graphviz-react": "^1.0.4",
+    "lodash": "^4.17.15",
+    "monaco-editor": "^0.19.0",
+    "office-ui-fabric-react": "^6.174.0",
+    "prettier": "^1.19.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-markdown": "^4.3.1",
+    "react-scripts": "3.0.0",
+    "react-syntax-highlighter": "^12.2.1",
+    "remark-math": "^2.0.0",
+    "source-view": "0.0.5",
+    "typedraft": "^0.1.4",
+    "typescript": "3.4.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.149",
+    "@types/react-syntax-highlighter": "^11.0.4",
+    "@matejmazur/react-mathjax": "^0.1.10",
+    "@monaco-editor/react": "^3.0.1",
+    "@types/jest": "24.0.12",
+    "@types/node": "11.13.8",
+    "@types/prettier": "^1.19.0"
+  }
+}
