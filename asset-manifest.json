@@ -1,17 +1,13 @@
 {
   "files": {
-    "main.js": "/typedraft-playground/static/js/main.9dbefdc5.chunk.js",
-    "main.js.map": "/typedraft-playground/static/js/main.9dbefdc5.chunk.js.map",
-    "runtime~main.js": "/typedraft-playground/static/js/runtime~main.8eae1e33.js",
-    "runtime~main.js.map": "/typedraft-playground/static/js/runtime~main.8eae1e33.js.map",
-    "static/js/2.ba1a0d56.chunk.js": "/typedraft-playground/static/js/2.ba1a0d56.chunk.js",
-    "static/js/2.ba1a0d56.chunk.js.map": "/typedraft-playground/static/js/2.ba1a0d56.chunk.js.map",
-    "static/js/3.2951a2f4.chunk.js": "/typedraft-playground/static/js/3.2951a2f4.chunk.js",
-    "static/js/3.2951a2f4.chunk.js.map": "/typedraft-playground/static/js/3.2951a2f4.chunk.js.map",
-    "static/js/4.465ed130.chunk.js": "/typedraft-playground/static/js/4.465ed130.chunk.js",
-    "static/js/4.465ed130.chunk.js.map": "/typedraft-playground/static/js/4.465ed130.chunk.js.map",
+    "main.js": "/typedraft-playground/static/js/main.18657b0d.chunk.js",
+    "main.js.map": "/typedraft-playground/static/js/main.18657b0d.chunk.js.map",
+    "runtime~main.js": "/typedraft-playground/static/js/runtime~main.757fef17.js",
+    "runtime~main.js.map": "/typedraft-playground/static/js/runtime~main.757fef17.js.map",
+    "static/js/2.95ae5229.chunk.js": "/typedraft-playground/static/js/2.95ae5229.chunk.js",
+    "static/js/2.95ae5229.chunk.js.map": "/typedraft-playground/static/js/2.95ae5229.chunk.js.map",
     "index.html": "/typedraft-playground/index.html",
-    "precache-manifest.4dd72387d8d07bb26cdbc80f54d1b98e.js": "/typedraft-playground/precache-manifest.4dd72387d8d07bb26cdbc80f54d1b98e.js",
+    "precache-manifest.bfa317865152b5fc4c594bfe8d2321d0.js": "/typedraft-playground/precache-manifest.bfa317865152b5fc4c594bfe8d2321d0.js",
     "service-worker.js": "/typedraft-playground/service-worker.js"
   }
 }
