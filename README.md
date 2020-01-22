@@ -2,7 +2,7 @@
 
 A playground for typedraft with the Monaco Editor.
 
-See the playground in action: https://mistlog.github.io/typescript-playground.
+See the playground in action: https://mistlog.github.io/typedraft-playground.
 
 ## Local Setup
 
