@@ -15,22 +15,12 @@ monaco.init()
             noSyntaxValidation: true
         });
 
-        monaco.languages.registerDocumentFormattingEditProvider("typescript", {
-            async provideDocumentFormattingEdits(model, options, token)
-            {
-                return [{
-                    text: await FormatCode(model.getValue()),
-                    range: model.getFullModelRange()
-                }];
-            }
-        });
-
     })
     .catch(error => console.error('An error occurred during initialization of Monaco: ', error));
 
 export interface IEditorProps
 {
-    GetOutput:(code: string, mode: "markdown" | "code") => Promise<string>;
+    GetOutput:(code: string, mode: "markdown" | "code") => string;
     GetExampleUrl: (name: string) => string;
     examples: Examples;
 }
@@ -65,16 +55,10 @@ export function Editor(props: IEditorProps)
     //
     useEffect(() =>
     {
-        async function ResetInput()
-        {
-            // use set value instead of setInput to avoid "select all" state after setInput
-            const default_input = data ? await FormatCode(data) : "";
-            input_ref.current && input_ref.current.setValue(default_input);
-            const output = await GetOutput(default_input, mode_ref.current);
-            setOutput(output);
-        }
-
-        ResetInput();
+        const default_input = data || "";
+        input_ref.current && input_ref.current.setValue(default_input);
+        const output = GetOutput(default_input, mode_ref.current);
+        setOutput(output);
 
     }, [data]);
 
@@ -94,12 +78,13 @@ export function Editor(props: IEditorProps)
                 editorDidMount={(_, editor) =>
                 {
                     input_ref.current = editor;
+                    input_ref.current.setValue(data);
                 }}
                 language="typescript"
                 options={options}
-                onChange={debounce(async (event: any, value: string = "") =>
+                onChange={debounce((event: any, value: string = "") =>
                 {
-                    const output = await GetOutput(value, mode_ref.current);
+                    const output = GetOutput(value, mode_ref.current);
                     setOutput(output);
                 }, 1000)}
                 loading={<Spinner size={SpinnerSize.large} />}
@@ -117,18 +102,6 @@ export function Editor(props: IEditorProps)
     )
 }
 
-export async function FormatCode(output: string)
-{
-    const prettier = await import("prettier/standalone");
-    const ts_parser = await import("prettier/parser-typescript");
-
-    const formatted = prettier.format(output, {
-        parser: "typescript",
-        plugins: [ts_parser]
-    })
-
-    return formatted;
-}
 /**
  * 
  */

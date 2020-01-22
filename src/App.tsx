@@ -1,19 +1,18 @@
 import React from 'react';
 import { Header } from "./component/Header";
-import { Editor, FormatCode } from "./component/Editor";
+import { Editor } from "./component/Editor";
 import { mergeStyleSets } from 'office-ui-fabric-react';
 import { Transcriber } from "typedraft";
 import { IExample } from "./component/ExampleNav";
 
-async function GetOutput(input: string, mode: "markdown" | "code"): Promise<string>
+function GetOutput(input: string, mode: "markdown" | "code"): string
 {
     try
     {
         if (mode === "code")
         {
             const code = new Transcriber(input).Transcribe();
-            const output = await FormatCode(code);
-            return output;
+            return code;
         }
 
         return "";

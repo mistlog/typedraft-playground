@@ -28,9 +28,12 @@ export function ExampleNav(props: IExampleNav)
             styles={{ root: { width: 200, marginTop: -20 } }}
             onLinkClick={(_, item) =>
             {
-                const name = item!.key!;
-                SetExample(name);
-                setSelected(name);
+                const name = item!.key;
+                if (name)
+                {
+                    SetExample(name);
+                    setSelected(name);
+                }
             }}
         />
     )
