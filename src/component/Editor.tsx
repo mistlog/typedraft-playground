@@ -3,10 +3,9 @@ import { monaco, ControlledEditor as MonacoEditor } from '@monaco-editor/react';
 import { mergeStyleSets, SpinnerSize, Spinner } from 'office-ui-fabric-react';
 import { ExampleNav, Examples, IExample } from './ExampleNav';
 import * as EditorAPI from 'monaco-editor/esm/vs/editor/editor.api';
-import * as prettier from "prettier/standalone";
-import * as TypescriptParser from "prettier/parser-typescript";
 import { default as useAxios } from "axios-hooks";
-import { debounce } from "lodash";
+//@ts-ignore
+import * as debounce from "lodash.debounce";
 
 monaco.init()
     .then(monaco =>
@@ -17,13 +16,10 @@ monaco.init()
         });
 
         monaco.languages.registerDocumentFormattingEditProvider("typescript", {
-            provideDocumentFormattingEdits(model, options, token)
+            async provideDocumentFormattingEdits(model, options, token)
             {
                 return [{
-                    text: prettier.format(model.getValue(), {
-                        parser: "typescript",
-                        plugins: [TypescriptParser]
-                    }),
+                    text: await FormatCode(model.getValue()),
                     range: model.getFullModelRange()
                 }];
             }
@@ -34,7 +30,7 @@ monaco.init()
 
 export interface IEditorProps
 {
-    GetOutput: (code: string, mode: "markdown" | "code") => string;
+    GetOutput:(code: string, mode: "markdown" | "code") => Promise<string>;
     GetExampleUrl: (name: string) => string;
     examples: Examples;
 }
@@ -65,16 +61,22 @@ export function Editor(props: IEditorProps)
 
     //
     const [{ data }] = useAxios<string>(url)
-    let default_input = data ? FormatInput(data) : "";
 
     //
     useEffect(() =>
     {
-        // use set value instead of setInput to avoid "select all" state after setInput
-        input_ref.current && input_ref.current.setValue(default_input);
-        const output = GetOutput(default_input, mode_ref.current);
-        setOutput(output);
-    }, [default_input]);
+        async function ResetInput()
+        {
+            // use set value instead of setInput to avoid "select all" state after setInput
+            const default_input = data ? await FormatCode(data) : "";
+            input_ref.current && input_ref.current.setValue(default_input);
+            const output = await GetOutput(default_input, mode_ref.current);
+            setOutput(output);
+        }
+
+        ResetInput();
+
+    }, [data]);
 
     const options: EditorAPI.editor.IEditorOptions = {
         minimap: { enabled: false },
@@ -92,13 +94,12 @@ export function Editor(props: IEditorProps)
                 editorDidMount={(_, editor) =>
                 {
                     input_ref.current = editor;
-                    input_ref.current.setValue(default_input);
                 }}
                 language="typescript"
                 options={options}
-                onChange={debounce((event, value = "") =>
+                onChange={debounce(async (event: any, value: string = "") =>
                 {
-                    const output = GetOutput(value, mode_ref.current);
+                    const output = await GetOutput(value, mode_ref.current);
                     setOutput(output);
                 }, 1000)}
                 loading={<Spinner size={SpinnerSize.large} />}
@@ -116,11 +117,14 @@ export function Editor(props: IEditorProps)
     )
 }
 
-function FormatInput(output: string)
+export async function FormatCode(output: string)
 {
+    const prettier = await import("prettier/standalone");
+    const ts_parser = await import("prettier/parser-typescript");
+
     const formatted = prettier.format(output, {
         parser: "typescript",
-        plugins: [TypescriptParser]
+        plugins: [ts_parser]
     })
 
     return formatted;
