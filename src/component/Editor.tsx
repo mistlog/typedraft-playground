@@ -78,7 +78,7 @@ export function Editor(props: IEditorProps)
                 editorDidMount={(_, editor) =>
                 {
                     input_ref.current = editor;
-                    input_ref.current.setValue(data);
+                    input_ref.current.setValue(data || "");
                 }}
                 language="typescript"
                 options={options}
