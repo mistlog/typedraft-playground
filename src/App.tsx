@@ -4,6 +4,7 @@ import { Editor } from "./component/Editor";
 import { mergeStyleSets } from 'office-ui-fabric-react';
 import { Transcriber } from "typedraft";
 import { IExample } from "./component/ExampleNav";
+import { PatternMatch } from "draft-dsl-match";
 
 function GetOutput(input: string, mode: "markdown" | "code"): string
 {
@@ -11,7 +12,10 @@ function GetOutput(input: string, mode: "markdown" | "code"): string
     {
         if (mode === "code")
         {
-            const raw = new Transcriber(input).Transcribe();
+            const transcriber = new Transcriber(input);
+            transcriber.AddDSL("match", new PatternMatch());
+
+            const raw = transcriber.Transcribe();
             const code = raw.replace(new RegExp("\n[ ]*;\n?", "g"), "\n")
                 .replace(new RegExp("\n;", "g"), "\n");
             return code;
@@ -41,6 +45,7 @@ const examples = new Map<string, Array<IExample>>([
     ["Examples", [
         { display: "Huffman Tree", name: "huffman-tree.tsx" },
         { display: "Topological Sort", name: "topological-sort.tsx" },
+        { display: "Polynomial Addition", name: "polynomial-addition.tsx" },
         { display: "Transcriber", name: "transcriber.tsx" },
         { display: "Jack VM", name: "vm.tsx" }
     ]]
