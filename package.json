@@ -9,13 +9,14 @@
     "@uifabric/fluent-theme": "^0.16.7",
     "axios": "^0.19.1",
     "axios-hooks": "^1.9.0",
+    "draft-dsl-match": "0.0.2",
     "lodash.debounce": "^4.0.8",
     "monaco-editor": "^0.19.0",
     "office-ui-fabric-react": "^6.174.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.0",
-    "typedraft": "^0.1.5",
+    "typedraft": "^0.1.7",
     "typescript": "3.4.5"
   },
   "scripts": {
