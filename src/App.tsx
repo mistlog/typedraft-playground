@@ -15,9 +15,7 @@ function GetOutput(input: string, mode: "markdown" | "code"): string
             const transcriber = new Transcriber(input);
             transcriber.AddDSL("match", new PatternMatch());
 
-            const raw = transcriber.Transcribe();
-            const code = raw.replace(new RegExp("\n[ ]*;\n?", "g"), "\n")
-                .replace(new RegExp("\n;", "g"), "\n");
+            const code = transcriber.Transcribe();
             return code;
         }
 
