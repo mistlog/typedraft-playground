@@ -12,7 +12,7 @@ export function Header()
 
 const classNames = mergeStyleSets({
     container: {
-        backgroundColor: "#294E80",
+        backgroundColor: "#3178c6",
         border: "0px",
         padding: "10px",
         boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.25)",
