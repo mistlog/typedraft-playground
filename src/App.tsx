@@ -2,7 +2,7 @@ import React from 'react';
 import { Header } from "./component/Header";
 import { Editor } from "./component/Editor";
 import { mergeStyleSets } from 'office-ui-fabric-react';
-import { Transcriber } from "typedraft";
+import { MakeDefaultTranscriber } from "typedraft";
 import { IExample } from "./component/ExampleNav";
 import { PatternMatch } from "draft-dsl-match";
 
@@ -12,7 +12,7 @@ function GetOutput(input: string, mode: "markdown" | "code"): string
     {
         if (mode === "code")
         {
-            const transcriber = new Transcriber(input);
+            const transcriber = MakeDefaultTranscriber(input);
             transcriber.AddDSL("match", new PatternMatch());
 
             const code = transcriber.Transcribe();
@@ -33,20 +33,21 @@ function GetExampleUrl(example: string)
 }
 
 const examples = new Map<string, Array<IExample>>([
-    ["Local Context", [
-        { display: "Function", name: "local-context-function.tsx" },
-        { display: "Class", name: "local-context-class.tsx" }
+    ["Macro", [
+        { display: "Basic", name: "macro-function.tsx" },
+        { display: "Nested", name: "macro-nested.tsx" },
+        { display: "Class", name: "macro-class.tsx" },
     ]],
     ["DSL", [
         { display: "Match", name: "dsl-match.tsx" }
     ]],
-    ["Examples", [
-        { display: "Huffman Tree", name: "huffman-tree.tsx" },
-        { display: "Topological Sort", name: "topological-sort.tsx" },
-        { display: "Polynomial Addition", name: "polynomial-addition.tsx" },
-        { display: "Transcriber", name: "transcriber.tsx" },
-        { display: "Jack VM", name: "vm.tsx" }
-    ]]
+    // ["Examples", [
+    //     { display: "Huffman Tree", name: "huffman-tree.tsx" },
+    //     { display: "Topological Sort", name: "topological-sort.tsx" },
+    //     { display: "Polynomial Addition", name: "polynomial-addition.tsx" },
+    //     { display: "Transcriber", name: "transcriber.tsx" },
+    //     { display: "Jack VM", name: "vm.tsx" }
+    // ]]
 ]);
 
 export function App()
